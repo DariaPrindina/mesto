@@ -1,0 +1,15 @@
+.popup__input_type_profession {
+  width: 358px;
+  height: 27px;
+  padding: 0;
+  border: 0;
+  outline: none;
+  margin-bottom: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 500px){
+  .popup__input_type_profession {
+    width: 238px;
+}
+}
