@@ -16,8 +16,3 @@
   opacity: .5;
   cursor: pointer;
 }
-
-.element__button:active {
-  background-image: url(../../../images/union.svg);
-  opacity: 1;
-}

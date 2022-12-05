@@ -25,57 +25,17 @@
         <button class="profile__add-button" type="button" aria-label="Add"></button>
       </section>
       <section class="elements">
-        <article class="element">
-          <img class="element__image" src="./images/karachaevsk.png" alt="Каменный замок напротив горы">
-          <div class="element__row">
-            <h2 class="element__title">Карачаевск</h2>
-            <button class="element__button" type="button"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__image" src="./images/elbrus.png" alt="Пейзаж равнинных гор">
-          <div class="element__row">
-            <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__button" type="button"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__image" src="./images/dombay.png" alt="Гора Эльбрус">
-          <div class="element__row">
-            <h2 class="element__title">Домбай</h2>
-            <button class="element__button" type="button"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__image" src="./images/elbrus.png" alt="Каменный замок напротив горы">
-          <div class="element__row">
-            <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__button" type="button"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__image" src="./images/dombay.png" alt="Каменный замок напротив горы">
-          <div class="element__row">
-            <h2 class="element__title">Домбай</h2>
-            <button class="element__button" type="button"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__image" src="./images/karachaevsk.png" alt="Каменный замок напротив горы">
-          <div class="element__row">
-            <h2 class="element__title">Карачаево-Черкессия</h2>
-            <button class="element__button" type="button"></button>
-          </div>
-        </article>
+        <ul class="elements__list">
+        </ul>      
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
-    <div class="popup">
+    <div class="popup" id="popup_profile-edit">
       <div class="popup__container">
         <button class="popup__button-close" aria-label="Close" type="button"></button>
-        <form class="popup__content">
+        <form class="popup__content" id="form_edit-profile">
           <h3 class="popup__title">Редактировать профиль</h3>
           <fieldset class="popup__inputs">
             <input class="popup__input popup__input_type_name" type="text" placeholder="Ваше имя" name="name">
@@ -85,6 +45,36 @@
         </form>
       </div>
     </div>
+    <div class="popup" id="popup_add-element">
+      <div class="popup__container">
+        <button class="popup__button-close" aria-label="Close" type="button" id="popup_add-element__button-close"></button>
+        <form class="popup__content" id="form_add-place">
+          <h3 class="popup__title">Новое место</h3>
+          <fieldset class="popup__inputs">
+            <input class="popup__input popup__input_type_title" type="text" placeholder="Название" name="title">
+            <input class="popup__input popup__input_type_link" type="text" placeholder="Ссылка на картинку" name="link">
+          </fieldset>
+          <button class="popup__create-button" type="submit" aria-label="add">Добавить</button>
+        </form>
+      </div>
+    </div>
+    <div class="image-popup">
+      <div class="image-popup__container">
+        <button class="image-popup__button-close" aria-label="Close" type="button"></button>
+        <img class="image-popup__picture" src="" alt="">
+        <h3 class="image-popup__title"></h3>
+      </div>
+    </div>
+    <template id="card-template">
+      <li class="element">
+        <img class="element__image" src="" alt="">
+        <div class="element__row">
+          <h2 class="element__title"></h2>
+          <button class="element__button" type="button"></button>
+        </div>
+        <button class="element__delete-button" type="button"></button>
+      </li>
+    </template>
   </div>
   <script src="./scripts/script.js"></script>
 </body>
