@@ -86,20 +86,13 @@ const card = document.querySelector('#card-template').content.querySelector('.el
 
 /* open close popup image */
 const popupImage = document.querySelector('.image-popup');
-const popupImageButtonClose = popupImage.querySelector('.image-popup__button-close');
-const popupImagePicture = popupImage.querySelector('.image-popup__picture');
-const popupImageTitle = popupImage.querySelector('.image-popup__title');
-
-function openPopupImage() {
-  popupImage.classList.add('popup_opened');
-  popupImagePicture.src = image;
-  popupImageTitle.textContent = title;
-  popupImagePicture.alt = title;
-}
+const popupImageButtonClose = document.querySelector('.image-popup__button-close');
+const popupImageTitle = document.querySelector('.image-popup__title');
 
 function closePopupImage() {
   popupImage.classList.remove('popup_opened');
 }
+popupImageButtonClose.addEventListener('click', closePopupImage);
 
 
 /* генерация карточки */
@@ -122,8 +115,16 @@ const generateNewCard = (dataCard) => {
   pomoykaButton.addEventListener('click', deleteCard);
   const likeButton = copyCard.querySelector('.element__button');
   likeButton.addEventListener('click', likeCard);
-  linkCard.addEventListener('click', openPopupImage);
-  popupImageButtonClose.addEventListener('click', closePopupImage);
+
+  const imageForClick = copyCard.querySelector('.element__image');
+  const popupImage = document.querySelector('.image-popup');
+
+  imageForClick.addEventListener('click', () => {
+    popupImage.classList.add('popup_opened');
+    imageForClick.src = image;
+    popupImageTitle.textContent = title;
+    imageForClick.alt = title;
+});
 
   return copyCard;
 }
