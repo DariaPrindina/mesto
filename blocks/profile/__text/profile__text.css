@@ -1,11 +1,10 @@
 .profile__text {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin: 0 0 0 30px;
-  flex-wrap: wrap;
-  align-content: center;
-  align-items: flex-end;
   max-width: 340px;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 @media screen and (max-width: 570px){

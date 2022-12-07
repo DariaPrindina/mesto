@@ -17,8 +17,10 @@
         <div class="profile__info">
           <img class="profile__avatar" src="./images/avatar.png" alt="Аватар профиля">
           <div class="profile__text">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="profile__edit-button" type="button" aria-label="Edit"></button>
+            <div class="profile__first-row">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <button class="profile__edit-button" type="button" aria-label="Edit"></button>
+            </div>
             <p class="profile__profession">Исследователь океана</p>
           </div>
         </div>
@@ -32,44 +34,44 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
-    <div class="popup" id="popup_profile-edit">
+    <div class="popup popup_edit-profile">
       <div class="popup__container">
-        <button class="popup__button-close" aria-label="Close" type="button"></button>
+        <button class="popup__button-close popup__button-close_edit-profile" aria-label="Close" type="button"></button>
         <form class="popup__content" id="form_edit-profile">
           <h3 class="popup__title">Редактировать профиль</h3>
           <fieldset class="popup__inputs">
             <input class="popup__input popup__input_type_name" type="text" placeholder="Ваше имя" name="name">
             <input class="popup__input popup__input_type_profession" type="text" placeholder="Кто вы по жизни" name="profession">
           </fieldset>
-          <button class="popup__submit-button" type="submit" aria-label="Save">Сохранить</button>
+          <button class="popup__submit-button popup__submit-button_edit-profile" type="submit" aria-label="Save">Сохранить</button>
         </form>
       </div>
     </div>
-    <div class="popup" id="popup_add-element">
+    <div class="popup popup_add-element">
       <div class="popup__container">
-        <button class="popup__button-close" aria-label="Close" type="button" id="popup_add-element__button-close"></button>
+        <button class="popup__button-close popup__button-close_add-element" aria-label="Close" type="button"></button>
         <form class="popup__content" id="form_add-place">
           <h3 class="popup__title">Новое место</h3>
           <fieldset class="popup__inputs">
             <input class="popup__input popup__input_type_title" type="text" placeholder="Название" name="title">
             <input class="popup__input popup__input_type_link" type="text" placeholder="Ссылка на картинку" name="link">
           </fieldset>
-          <button class="popup__create-button" type="submit" aria-label="add">Добавить</button>
+          <button class="popup__submit-button popup__submit-button_add-element" type="submit" aria-label="add">Добавить</button>
         </form>
       </div>
     </div>
     <!-- Попап увеличения картинки -->
-    <div class="image-popup">
-      <div class="image-popup__container">
-        <button class="image-popup__button-close" aria-label="Close" type="button"></button>
-        <img class="image-popup__picture" src="#" alt="">
-        <h3 class="image-popup__title"></h3>
+    <div class="popup popup_open-image">
+      <div class="popup__container_open-image">
+        <button class="popup__button-close popup__button-close_open-image" aria-label="Close" type="button"></button>
+        <img class="popup__picture" src="#" alt="#">
+        <h3 class="popup__caption"></h3>
       </div>
     </div>
     <!-- Шаблон карточки -->
     <template id="card-template">
       <li class="element">
-        <img class="element__image" src="#" alt="">
+        <img class="element__image" src="#" alt="#">
         <div class="element__row">
           <h2 class="element__title"></h2>
           <button class="element__button" type="button"></button>
@@ -78,6 +80,7 @@
       </li>
     </template>
   </div>
-  <script src="./scripts/script.js"></script>
+  <script src="./scripts/cards.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
 </html>
