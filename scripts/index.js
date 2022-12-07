@@ -16,7 +16,7 @@ const popupInputProfession = document.querySelector('.popup__input_type_professi
 const popupEditForm = document.querySelector('#form_edit-profile');
 
 const popupImage = document.querySelector('.popup_open-image');
-const popupImageButtonClose = document.querySelector('.popup__button-close_open-image');
+const popupImageButtonClose = document.querySelector('.popup__button-close-image');
 const popupImageTitle = document.querySelector('.popup__caption');
 
 const elementsList = document.querySelector('.elements__list');
