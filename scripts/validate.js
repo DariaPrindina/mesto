@@ -1,25 +1,28 @@
 const showErrorInInputInvalid = (input, object) => {
   const error = document.querySelector(`#${input.id}-error`)
   if (input.validity.valid) {
-    error.textContent = '';
-    error.classList.remove(object.errorClass);
     input.classList.remove(object.inputErrorClass);
   } else {
-    error.textContent = input.validationMessage;
     error.classList.add(object.errorClass);
     input.classList.add(object.inputErrorClass);
   }
 }
 
-const disabledButton = (inputs, button, object) => {
-  const inputIsInvalid = inputs.some(input => !input.validity.valid);
+const clearInputError = (input) => {
+  const error = document.querySelector(`#${input.id}-error`)
+  if (input.validity.valid) {
+    error.textContent = '';
+  } else {
+    error.textContent = input.validationMessage;
+  }
+}
 
-  if (inputIsInvalid) {
-    console.log('задизейблить');
+const disabledButton = (inputs, button, object) => {
+
+  if (inputs.some(input => !input.validity.valid) === true) {
     button.classList.add(object.inactiveButtonClass);
     button.disabled = true;
   } else {
-    console.log('раздизейблить');
     button.classList.remove(object.inactiveButtonClass);
     button.disabled = false;
   }
@@ -31,18 +34,16 @@ const enableValidation = (object) => {
     const inputs = Array.from(form.querySelectorAll(object.inputSelector));
     const button = form.querySelector(object.submitButtonSelector);
   
-    form.addEventListener('submit', (e) => {
-      e.preventDefault()
-    })
-  
     inputs.forEach(input => {
       input.addEventListener('input', () => {
         showErrorInInputInvalid(input, object);
+        clearInputError(input);
         disabledButton(inputs, button, object);
       });
     })
   })
 }
+
 
 enableValidation({
   formSelector: '.popup__content',
