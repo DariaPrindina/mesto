@@ -40,8 +40,6 @@ function closePopup(popup) {
   document.removeEventListener('keydown', closePopupByEsc);
 }
 
-const popupArr 
-
 function closePopupByOverlay(event) {
   if (event.target.classList.contains('popup_opened')) {
     closePopup(event.target);
