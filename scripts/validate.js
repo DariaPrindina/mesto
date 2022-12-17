@@ -1,19 +1,32 @@
-const showErrorInInputInvalid = (input, object) => {
-  const error = document.querySelector(`#${input.id}-error`)
-  if (input.validity.valid) {
-    input.classList.remove(object.inputErrorClass);
-  } else {
-    error.classList.add(object.errorClass);
+const inputIsInvalid = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  })
+}
+
+const makeColoredInputInvalid = (input, object) => {
+  if (inputIsInvalid) {
     input.classList.add(object.inputErrorClass);
+  }
+}
+
+const removeColorInputInvalid = (input, object) => {
+  if (!inputIsInvalid) {
+    input.classList.remove(object.inputErrorClass);
+  }
+}
+
+const showInputError = (input) => {
+  const error = document.querySelector(`#${input.id}-error`)
+  if (inputIsInvalid) {
+    error.textContent = input.validationMessage;
   }
 }
 
 const clearInputError = (input) => {
   const error = document.querySelector(`#${input.id}-error`)
-  if (input.validity.valid) {
+  if (!inputIsInvalid) {
     error.textContent = '';
-  } else {
-    error.textContent = input.validationMessage;
   }
 }
 
@@ -36,14 +49,15 @@ const enableValidation = (object) => {
   
     inputs.forEach(input => {
       input.addEventListener('input', () => {
-        showErrorInInputInvalid(input, object);
+        makeColoredInputInvalid(input, object);
+        removeColorInputInvalid(input, object);
         clearInputError(input);
+        showInputError(input);
         disabledButton(inputs, button, object);
       });
     })
   })
 }
-
 
 enableValidation({
   formSelector: '.popup__content',

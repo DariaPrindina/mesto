@@ -34,10 +34,13 @@ function openPopup(popup) {
   popup.addEventListener('click', closePopupByOverlay);
   document.addEventListener('keydown', closePopupByEsc);
 }
+
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupByEsc);
 }
+
+const popupArr 
 
 function closePopupByOverlay(event) {
   if (event.target.classList.contains('popup_opened')) {
@@ -146,3 +149,4 @@ popupAddElementCloseButton.addEventListener('click', closePopupAddElement);
 popupImageButtonClose.addEventListener('click', closePopupImage);
 
 formAddElement.addEventListener('submit', submitFormAddCard);
+
