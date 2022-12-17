@@ -40,8 +40,6 @@ function closePopup(popup) {
   document.removeEventListener('keydown', closePopupByEsc);
 }
 
-const popupArr 
-
 function closePopupByOverlay(event) {
   if (event.target.classList.contains('popup_opened')) {
     closePopup(event.target);
@@ -136,7 +134,6 @@ initialCards.forEach((dataCard) => {
   addCard(dataCard);
 })
 
-
 /* Слушатели */
 popupOpenButtonEditProfile.addEventListener('click', openPopupEditProfile);
 popupCloseButtonEditProfile.addEventListener('click', closePopupEditProfile);
@@ -149,4 +146,3 @@ popupAddElementCloseButton.addEventListener('click', closePopupAddElement);
 popupImageButtonClose.addEventListener('click', closePopupImage);
 
 formAddElement.addEventListener('submit', submitFormAddCard);
-
