@@ -13,7 +13,7 @@ const makeColorInputInvalid = (input, object) => {
 
 const removeColorInputInvalid = (input, object) => {
   if (!inputIsInvalid) {
-    input.classList.add(object.inputErrorClass);
+    input.classList.remove(object.inputErrorClass);
   }
 }
 
