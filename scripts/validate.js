@@ -2,9 +2,10 @@ const inputIsInvalid = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
   })
+  
 }
 
-const makeColoredInputInvalid = (input, object) => {
+const makeColorInputInvalid = (input, object) => {
   if (inputIsInvalid) {
     input.classList.add(object.inputErrorClass);
   }
@@ -12,7 +13,7 @@ const makeColoredInputInvalid = (input, object) => {
 
 const removeColorInputInvalid = (input, object) => {
   if (!inputIsInvalid) {
-    input.classList.remove(object.inputErrorClass);
+    input.classList.add(object.inputErrorClass);
   }
 }
 
@@ -31,7 +32,6 @@ const clearInputError = (input) => {
 }
 
 const disabledButton = (inputs, button, object) => {
-
   if (inputs.some(input => !input.validity.valid) === true) {
     button.classList.add(object.inactiveButtonClass);
     button.disabled = true;
@@ -49,11 +49,12 @@ const enableValidation = (object) => {
   
     inputs.forEach(input => {
       input.addEventListener('input', () => {
-        makeColoredInputInvalid(input, object);
+        makeColorInputInvalid(input, object);
         removeColorInputInvalid(input, object);
-        clearInputError(input);
         showInputError(input);
+        clearInputError(input);
         disabledButton(inputs, button, object);
+        console.log('inputIsInvalid');
       });
     })
   })
