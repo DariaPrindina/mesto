@@ -31,14 +31,16 @@ const popupImageCaption = document.querySelector('.popup__caption');
 /* Функции */
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  popup.addEventListener('mousedown', closePopupByOverlay);
   document.addEventListener('keydown', closePopupByEsc);
 }
+
+popupEditProfile.addEventListener('mousedown', closePopupByOverlay);
+popupImage.addEventListener('mousedown', closePopupByOverlay);
+popupAddElement.addEventListener('mousedown', closePopupByOverlay);
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupByEsc);
-  popup.removeEventListener('click', closePopupByOverlay);
 }
 
 function closePopupByOverlay(event) {
