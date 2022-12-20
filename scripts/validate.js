@@ -1,34 +1,21 @@
-const inputIsInvalid = (inputList) => {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  })
-  
-}
-
-const makeColorInputInvalid = (input, object) => {
-  if (inputIsInvalid) {
-    input.classList.add(object.inputErrorClass);
+const isValid = (input, form, object) => {
+  if (input.validity.valid) {
+    hideInputError(input, form, object);
+  } else {
+    showInputError(input, form, object);
   }
 }
 
-const removeColorInputInvalid = (input, object) => {
-  if (!inputIsInvalid) {
-    input.classList.remove(object.inputErrorClass);
-  }
+const showInputError = (input, form, object) => {
+  const error = form.querySelector(`#${input.id}-error`)
+  input.classList.add(object.inputErrorClass);
+  error.textContent = input.validationMessage;
 }
 
-const showInputError = (input) => {
-  const error = document.querySelector(`#${input.id}-error`)
-  if (inputIsInvalid) {
-    error.textContent = input.validationMessage;
-  }
-}
-
-const clearInputError = (input) => {
-  const error = document.querySelector(`#${input.id}-error`)
-  if (!inputIsInvalid) {
-    error.textContent = '';
-  }
+const hideInputError = (input, form, object) => {
+  const error = form.querySelector(`#${input.id}-error`)
+  error.textContent = '';
+  input.classList.remove(object.inputErrorClass);
 }
 
 const disabledButton = (inputs, button, object) => {
@@ -49,12 +36,8 @@ const enableValidation = (object) => {
   
     inputs.forEach(input => {
       input.addEventListener('input', () => {
-        makeColorInputInvalid(input, object);
-        removeColorInputInvalid(input, object);
-        showInputError(input);
-        clearInputError(input);
+        isValid(input, form, object);
         disabledButton(inputs, button, object);
-        console.log('inputIsInvalid');
       });
     })
   })

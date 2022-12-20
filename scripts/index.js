@@ -31,7 +31,7 @@ const popupImageCaption = document.querySelector('.popup__caption');
 /* Функции */
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  popup.addEventListener('click', closePopupByOverlay);
+  popup.addEventListener('mousedown', closePopupByOverlay);
   document.addEventListener('keydown', closePopupByEsc);
 }
 
