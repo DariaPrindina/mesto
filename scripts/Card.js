@@ -22,11 +22,8 @@ export class Card {
   }
 
   _setEventListeners() {
-    this._likeButton = this._element.querySelector('.element__button');
-    this._pomoykaButton = this._element.querySelector('.element__delete-button');
-
     this._likeButton.addEventListener('click', this._handleLike);
-    this._pomoykaButton.addEventListener('click', this._handleDelete);
+    this._deleteButton.addEventListener('click', this._handleDelete);
     this._elementLink.addEventListener('click', () => {this._openPopupImage(this._dataCard.title, this._dataCard.image)})
   }
 
@@ -35,6 +32,8 @@ export class Card {
     
     this._elementLink = this._element.querySelector('.element__image');
     this._elementTitle = this._element.querySelector('.element__title');
+    this._likeButton = this._element.querySelector('.element__button');
+    this._deleteButton = this._element.querySelector('.element__delete-button');
 
     this._elementTitle.textContent = this._title;
 

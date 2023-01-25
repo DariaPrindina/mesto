@@ -43,8 +43,8 @@ export class FormValidator {
     });
   }
 
-  _toggleButton = (input) => {
-    if (input.some(input => !input.validity.valid) === true) {
+  _toggleButton = () => {
+    if (this._inputList.some(input => !input.validity.valid) === true) {
       this._button.classList.add(this._config.inactiveButtonClass);
       this._button.disabled = true;
     } else {

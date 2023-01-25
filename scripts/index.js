@@ -30,10 +30,12 @@ const popups = document.querySelectorAll('.popup')
 /* Функции */
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByEsc); 
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByEsc); 
 }
 
 popups.forEach((popup) => {
@@ -46,6 +48,12 @@ popups.forEach((popup) => {
     }
   })
 })
+
+function closePopupByEsc(event) { 
+  if (event.key === "Escape") { 
+    closePopup(document.querySelector('.popup_opened')); 
+  } 
+} 
 
 function openPopupEditProfile() {
   popupInputName.value = profileName.textContent;
@@ -128,9 +136,4 @@ const enableValidation = (config) => {
     validator.enableValidation();
   })
 }
-enableValidation(formValidators);
-
-const popupAddElementValidator = new FormValidator(validationConfig, formAddElement);
-const popupEditFormValidator = new FormValidator(validationConfig, popupEditForm)
-popupAddElementValidator.enableValidation();
-popupEditFormValidator.enableValidation();
+enableValidation(validationConfig);
