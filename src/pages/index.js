@@ -1,4 +1,4 @@
-import './index.css' // главный файл стилей 
+import './index.css'
 import { 
   initialCards, 
   validationConfig,
@@ -12,7 +12,7 @@ import {
   popupAddInputLink,
   popupImagePicture,
   popupImageCaption 
-} from "../components/addition.js";
+} from "../utils/addition.js";
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { Section } from "../components/Section.js";
@@ -25,42 +25,34 @@ const userInfo = new UserInfo({
   profession: profileProfession
 })
 
-const formSubmitEditProfile = (value) => {
-  userInfo.setUserInfo(value)
-  formPopupEditProfile.setEventListeners();
-}
-
-const formSubmitAddCard = () => {
-  formPopupAddElement.setEventListeners();
-  const element = createCard(
-    {title: popupAddInputTitle.value, 
-    image: popupAddInputLink.value
-  })
-  listCards.addItem(element);
-  formPopupAddElement.close();
-}
-
 const formPopupEditProfile = new PopupWithForm(
-  '.popup_edit-profile', formSubmitEditProfile)
+  '.popup_edit-profile',
+  {formSubmit: (data) => {
+    userInfo.setUserInfo(data)
+  }}
+)
+formPopupEditProfile.setEventListeners();
 
-  const formPopupAddElement = new PopupWithForm(
-  '.popup_add-element', formSubmitAddCard)
+const formPopupAddElement = new PopupWithForm(
+  '.popup_add-element', 
+  {formSubmit: (dataCard) => {
+    listCards.addItem(createCard(dataCard));
+    formPopupAddElement.close();
+  }})
+formPopupAddElement.setEventListeners();
 
-const handleCardClick = (title, image) => {
-  const popupWhithImage = new PopupWithImage(
-    {title: popupImagePicture,
-     image: popupImageCaption},
-    '.popup_open-image'
-  )
-  popupWhithImage.open(title, image)
-  popupWhithImage.setEventListeners();
-}
+const popupWhithImage = new PopupWithImage(
+  '.popup_open-image')
+popupWhithImage.setEventListeners();
 
 const createCard = (dataCard) => {
-  const cardNew = new Card (
+  const cardNew = new Card ({
     dataCard,
-    '#card-template', 
-    handleCardClick);
+    templateSelector: '#card-template', 
+    handleCardClick: (title, image) => {
+      popupWhithImage.open(title, image)
+    }
+  });
   return cardNew.generateCard();
 }
 
@@ -89,15 +81,11 @@ enableValidation(validationConfig);
 
 popupEditProfileOpenButton.addEventListener('click', () => {
   formValidators['form_edit-profile'].resetValidation();
-  const {name, profession} = userInfo.getUserInfo();
-  popupInputName.value = name;
-  popupInputProfession.value = profession;
+  formPopupEditProfile.setInputValues(userInfo.getUserInfo())
   formPopupEditProfile.open();
-  formPopupEditProfile.setEventListeners();
 });
 
 popupAddElementOpenButton.addEventListener('click', () => {
   formValidators['form_add-place'].resetValidation();
   formPopupAddElement.open();
-  formPopupAddElement.setEventListeners();
 });
