@@ -35,10 +35,14 @@ formPopupEditProfile.setEventListeners();
 
 const formPopupAddElement = new PopupWithForm(
   '.popup_add-element', 
-  {formSubmit: (dataCard) => {
-    listCards.addItem(createCard(dataCard));
+  {formSubmit: (data) => {
+    const image = data["link"]
+    const title = data["title"]
+    listCards.addItem(createCard({image, title}));
     formPopupAddElement.close();
+    console.log(data)
   }})
+
 formPopupAddElement.setEventListeners();
 
 const popupWhithImage = new PopupWithImage(
@@ -47,7 +51,7 @@ popupWhithImage.setEventListeners();
 
 const createCard = (dataCard) => {
   const cardNew = new Card ({
-    dataCard,
+    dataCard, 
     templateSelector: '#card-template', 
     handleCardClick: (title, image) => {
       popupWhithImage.open(title, image)
