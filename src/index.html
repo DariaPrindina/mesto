@@ -14,13 +14,18 @@
     <main class="content">
       <section class="profile">
         <div class="profile__info">
-          <img class="profile__avatar" src="<%=require('./images/avatar.png')%>" alt="Аватар профиля">
+          <div class="profile__avatar-edit">  
+            <img class="profile__avatar" src="" alt="Аватар профиля">  
+            <div class="profile__avatar-overlay">
+              <button class="profile__avatar-edit-button" type="button" aria-label="Edit-avatar"></button>
+            </div>
+          </div>
           <div class="profile__text">
             <div class="profile__first-row">
-              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <h1 class="profile__name"></h1>
               <button class="profile__edit-button" type="button" aria-label="Edit"></button>
             </div>
-            <p class="profile__profession">Исследователь океана</p>
+            <p class="profile__profession"></p>
           </div>
         </div>
         <button class="profile__add-button" type="button" aria-label="Add"></button>
@@ -33,6 +38,7 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
+    <!-- Попап редактирования профиля -->
     <div class="popup popup_edit-profile">
       <div class="popup__container">
         <button class="popup__button-close popup__button-close_edit-profile" aria-label="Close" type="button"></button>
@@ -70,6 +76,7 @@
         </form>
       </div>
     </div>
+    <!-- Попап добавления карточки -->
     <div class="popup popup_add-element">
       <div class="popup__container">
         <button class="popup__button-close popup__button-close_add-element" aria-label="Close" type="button"></button>
@@ -107,6 +114,39 @@
         </form>
       </div>
     </div>
+    <!-- Попап обновления аватара -->
+    <div class="popup popup_update-avatar">
+      <div class="popup__container">
+        <button class="popup__button-close popup__button-close_add-element" aria-label="Close" type="button"></button>
+        <form class="popup__content" id="form_update-avatar" name="form_update-avatar" novalidate>
+          <h3 class="popup__title">Обновить аватар</h3>
+          <input 
+            id="input-avatar"
+            class="popup__input popup__input_type_avatar" 
+            type="url" 
+            placeholder="Ссылка на фото"  
+            name="avatar" 
+            required
+          >
+          <span 
+            id="input-avatar-error"
+            class="popup__input-error avatar-input-error"
+          >
+          </span>
+          <button class="popup__submit-button popup__submit-button_update-avatar popup__submit-button_inactive" disabled type="submit" aria-label="save">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <!-- Попап подтверждения удаления карточки -->
+    <div class="popup popup_confirm">
+      <div class="popup__container">
+        <button class="popup__button-close popup__button-close_confirm" aria-label="Close" type="button"></button>
+        <form class="popup__content" id="form_confirm" name="form_confirm" novalidate>
+          <h3 class="popup__title popup__title-confirm">Вы уверены?</h3>
+          <button class="popup__submit-button popup__submit-button_confirm" disabled type="submit" aria-label="confirm">Да</button>
+        </form>
+      </div>
+    </div>
     <!-- Попап увеличения картинки -->
     <div class="popup popup_open-image">
       <div class="popup__container-image">
@@ -121,7 +161,10 @@
         <img class="element__image" src="#" alt="#">
         <div class="element__row">
           <h2 class="element__title"></h2>
-          <button class="element__button" type="button"></button>
+          <div class="element__likes">
+            <button class="element__button" type="button"></button>
+            <p class="element__number-likes"></p>
+          </div>
         </div>
         <button class="element__delete-button" type="button"></button>
       </li>

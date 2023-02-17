@@ -9,4 +9,5 @@
   white-space: nowrap;
   overflow: hidden;
   max-width: 215px;
+  align-self: center;
 }

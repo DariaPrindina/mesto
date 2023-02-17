@@ -1,30 +1,3 @@
-export const initialCards = [
-  {
-    title: 'Архыз',
-    image: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    title: 'Челябинская область',
-    image: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    title: 'Иваново',
-    image: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    title: 'Камчатка',
-    image: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    title: 'Холмогорский район',
-    image: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    title: 'Байкал',
-    image: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 export const validationConfig = ({
   formSelector: '.popup__content',
   inputSelector: '.popup__input',
@@ -44,3 +17,8 @@ export const popupAddInputTitle = document.querySelector('.popup__input_type_tit
 export const popupAddInputLink = document.querySelector('.popup__input_type_link');
 export const popupImagePicture = document.querySelector('.popup__picture');
 export const popupImageCaption = document.querySelector('.popup__caption');
+export const popupEditAvatarOpenButton = document.querySelector('.profile__avatar-overlay')
+export const popupAvatarInputImg = document.querySelector('.popup__input_type_avatar')
+export const avatarImg = document.querySelector('.profile__avatar')
+export const elementTitle = document.querySelector('.element__title')
+export const elementImage = document.querySelector('.element__image')
