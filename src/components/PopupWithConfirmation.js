@@ -6,16 +6,14 @@ export class PopupWithConfirmation extends Popup {
     this._form = this._popup.querySelector('.popup__content')
   }
 
-  handleSubmit(remove) {
-    this._handleSubmit = remove;
+  confirmDeletion(callback){
+    this._handleSubmitDeletion = callback
   }
 
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener('click', (event) => {
-      event.preventDefault();
-      this.handleSubmit()
-      this.close();
+    this._form.addEventListener('submit', () => {
+      this._handleSubmitDeletion()
     })
   }
 }

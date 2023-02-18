@@ -106,33 +106,55 @@ const popupWhithImage = new PopupWithImage(
 popupWhithImage.setEventListeners();
 
 const popupWithConfirmation = new PopupWithConfirmation(
-  '.popup_confirm'
-)
+  '.popup_confirm')
 popupWithConfirmation.setEventListeners();
 
 const createCard = (data) => {
   const cardNew = new Card ({
-    api,
     userId: userId,
     data: data, 
     templateSelector: '#card-template', 
     handleCardClick: (name, link) => {
       popupWhithImage.open(name, link)
     },
+
     handleConfirmDeletion: (cardId) => {
-      popupWithConfirmation.open();
-      popupWithConfirmation.handleSubmit(() => {
+      console.log('CARDID = ' + cardId)
+      popupWithConfirmation.confirmDeletion(() => {
         api.deleteCard(cardId)
         .then(() => {
+          cardNew.handleDeleteCard()
           popupWithConfirmation.close()
-          cardNew.handleDelete()
         })
         .catch((err) => {
           console.log(`Ошибка => ${err} => ${err.status}`)
         })
+        .finally((err) => {
+          console.log(err)
+        })
       })
-    }
-   
+      popupWithConfirmation.open()
+    },
+    
+    likeCard: (cardId) => {
+      if (cardNew.hasUserLike()) {
+        api.deleteLike(cardId)
+        .then((data) => {
+          cardNew.handleLike(data.likes)
+        })
+        .catch((err) => {
+          console.log(`Ошибка => ${err} => ${err.status}`)
+        })
+      } else {
+        api.putLike(cardId)
+        .then((data) => {
+          cardNew.handleLike(data.likes)
+        })
+        .catch((err) => {
+          console.log(`Ошибка => ${err} => ${err.status}`)
+        })
+      } 
+    }  
   });
   return cardNew.generateCard();
 }

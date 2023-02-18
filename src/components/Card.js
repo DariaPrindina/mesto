@@ -1,8 +1,7 @@
 export class Card {
   // constructor(data) // {name, link, likes, userId}
-  constructor ({api, data, templateSelector, handleCardClick, userId, handleConfirmDeletion}) {
+  constructor ({data, templateSelector, handleCardClick, userId, handleConfirmDeletion, likeCard}) {
     this._data = data;
-    this._api = api;
     this._userId = userId;
     this._name = data.name;
     this._link = data.link;
@@ -12,6 +11,7 @@ export class Card {
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._handleConfirmDeletion = handleConfirmDeletion;
+    this._likeCard = likeCard;
   }
 
   _getTemplate() {
@@ -20,29 +20,41 @@ export class Card {
     return cardElement;
   }
 
-  _like() {
-    if (!this._likeButton.classList.contains('element__button_active')) {
-      this._api.putLike(this._id)
-      .then((data) => {
-        this._numberLikes.textContent = data.likes.length;
-        this._likeButton.classList.add('.element__button_active')
-      })
+  handleLike(likes) {
+    this._likes = likes
+    this._numberLikes.textContent = this._likes.length
+    this.switchColorLike()
+  }
+
+  handleDeleteLike() {
+    this._numberLikes.textContent = this._likes.length
+    this._likeButton.classList.remove('element__button_active')
+  }
+
+  handleDeleteCard(){
+    this._element.remove()
+    this._element = null
+  }
+
+  hasUserLike() {
+    return this._likes.some((like) => {return like._id === this._userId})
+  }
+
+  switchColorLike() {
+    if (this.hasUserLike()) {
+      this._likeButton.classList.add('element__button_active')
     } else {
-      this._api.deleteLike(this._id)
-      .then((data) => {
-        this._likeButton.classList.remove('.element__button_active')
-        this._numberLikes.textContent = data.likes.length;
-      })
+      this._likeButton.classList.remove('element__button_active')
     }
   }
 
-  handleDelete(){
-    this._element.remove()
-  }
-
   _setEventListeners() {
-    this._likeButton.addEventListener('click', () => {this._like()});
-    this._deleteButton.addEventListener('click', () =>  {this._handleConfirmDeletion(this._id)});
+    this._likeButton.addEventListener('click', () => {
+      this._likeCard(this._id)
+      this.switchColorLike()
+    });
+    this._deleteButton.addEventListener('click', () =>  {
+      this._handleConfirmDeletion(this._id)});
     this._elementLink.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link)})
   }
@@ -61,7 +73,9 @@ export class Card {
     this._elementLink.alt = this._name;  
 
     
-    if(this._likes.some((like) => like._id === this._userId)) {
+    if(this._likes.some((like) => {
+       return like._id === this._userId
+      })) {
       this._likeButton.classList.add('element__button_active')
     }
 
