@@ -123,9 +123,11 @@ const createCard = (data) => {
     userId: userId,
     data: data, 
     templateSelector: '#card-template', 
+    
     handleCardClick: (name, link) => {
       popupWhithImage.open(name, link)
     },
+
     handleConfirmDeletion: (cardId, card) => {
       popupWithConfirmation.open(cardId)
       popupWithConfirmation.listenerDeleteCard(cardId)
