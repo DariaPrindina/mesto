@@ -117,25 +117,20 @@ const createCard = (data) => {
     handleCardClick: (name, link) => {
       popupWhithImage.open(name, link)
     },
-
     handleConfirmDeletion: (cardId) => {
-      console.log('CARDID = ' + cardId)
+      popupWithConfirmation.open()
       popupWithConfirmation.confirmDeletion(() => {
         api.deleteCard(cardId)
-        .then(() => {
-          cardNew.handleDeleteCard()
-          popupWithConfirmation.close()
-        })
-        .catch((err) => {
-          console.log(`Ошибка => ${err} => ${err.status}`)
-        })
-        .finally((err) => {
-          console.log(err)
-        })
+      .then(() => {
+        cardNew.handleDeleteCard()
+        popupWithConfirmation.close()
       })
-      popupWithConfirmation.open()
+      .catch((err) => {
+        console.log(`Ошибка => ${err} => ${err.status}`)
+      })
+      })
     },
-    
+
     likeCard: (cardId) => {
       if (cardNew.hasUserLike()) {
         api.deleteLike(cardId)
