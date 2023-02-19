@@ -106,7 +106,17 @@ const popupWhithImage = new PopupWithImage(
 popupWhithImage.setEventListeners();
 
 const popupWithConfirmation = new PopupWithConfirmation(
-  '.popup_confirm')
+  '.popup_confirm', {
+    deletion: (card) => {
+    api.deleteCard(card)
+      .then(() => {
+        card.remove()
+        popupWithConfirmation.close()
+      })
+      .catch((err) => {
+        console.log(`Ошибка => ${err} => ${err.status}`)
+      })
+  }})
 popupWithConfirmation.setEventListeners();
 
 const createCard = (data) => {
@@ -118,17 +128,9 @@ const createCard = (data) => {
       popupWhithImage.open(name, link)
     },
     handleConfirmDeletion: (cardId) => {
-      popupWithConfirmation.open()
-      popupWithConfirmation.confirmDeletion(() => {
-        api.deleteCard(cardId)
-      .then(() => {
-        cardNew.handleDeleteCard()
-        popupWithConfirmation.close()
-      })
-      .catch((err) => {
-        console.log(`Ошибка => ${err} => ${err.status}`)
-      })
-      })
+      popupWithConfirmation.open(cardId)
+      console.log(cardId)
+      popupWithConfirmation.listenerDeleteCard(cardId)
     },
 
     likeCard: (cardId) => {
