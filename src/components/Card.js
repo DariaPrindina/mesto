@@ -33,7 +33,6 @@ export class Card {
 
   handleDeleteCard(){
     this._element.remove()
-    this._element = null
   }
 
   hasUserLike() {
@@ -54,7 +53,7 @@ export class Card {
       this.switchColorLike()
     });
     this._deleteButton.addEventListener('click', () =>  {
-      this._handleConfirmDeletion(this._id)});
+      this._handleConfirmDeletion(this._element)});
     this._elementLink.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link)})
   }

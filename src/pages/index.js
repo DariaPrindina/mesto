@@ -106,8 +106,7 @@ const popupWhithImage = new PopupWithImage(
 popupWhithImage.setEventListeners();
 
 const popupWithConfirmation = new PopupWithConfirmation(
-  '.popup_confirm', {
-    deletion: (card) => {
+  '.popup_confirm', {deletion: (card) => {
     api.deleteCard(card)
       .then(() => {
         card.remove()
@@ -127,10 +126,10 @@ const createCard = (data) => {
     handleCardClick: (name, link) => {
       popupWhithImage.open(name, link)
     },
-    handleConfirmDeletion: (cardId) => {
+    handleConfirmDeletion: (cardId, card) => {
       popupWithConfirmation.open(cardId)
-      console.log(cardId)
       popupWithConfirmation.listenerDeleteCard(cardId)
+      cardNew.handleDeleteCard()
     },
 
     likeCard: (cardId) => {

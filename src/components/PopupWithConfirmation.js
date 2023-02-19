@@ -8,10 +8,6 @@ export class PopupWithConfirmation extends Popup {
     this._deletion = deletion
   }
 
-  confirmDeletion(handleSubmitDeletion){
-    this._handleSubmitDeletion = handleSubmitDeletion
-  }
-
   listenerDeleteCard(card) {
     this._buttonConfirm.addEventListener('mousedown', () => {
       this._deletion(card)
