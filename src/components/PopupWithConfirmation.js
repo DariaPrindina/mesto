@@ -8,19 +8,16 @@ export class PopupWithConfirmation extends Popup {
     this._deletion = deletion
   }
 
-  listenerDeleteCard(card) {
-    this._buttonConfirm.addEventListener('mousedown', () => {
-      this._deletion(card)
-      this.close()
-    })
+  setData = (card) => {
+    this._card = card
+    this._buttonConfirm.disabled = '';
   }
 
   setEventListeners() {
     super.setEventListeners();
-    this.listenerDeleteCard()
-    // this._buttonConfirm.addEventListener('mousedown', () => {
-    //   this._handleSubmitDeletion()
-    //   this.close()
-    // })
+    this._form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      this._deletion(this._card)
+    })
   }
 }

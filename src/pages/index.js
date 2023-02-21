@@ -32,7 +32,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 .then(([user, data]) => {
   userInfo.setUserInfo(user);
   userId = user._id;
-  listCards.renderItems(data);
+  cardsList.renderItems(data);
 })
 .catch((err) => {
   console.log(`Ошибка 2=> ${err}`);
@@ -68,9 +68,8 @@ const formPopupEditAvatar = new PopupWithForm(
   {formSubmit: (data) => {
     formPopupEditAvatar.loading(true)
     api.updAvatar(data)
-    .then((data) => {
-      avatarImg.src = data.avatar
-      // document.querySelector('.profile__avatar').src = image.value
+    .then((res) => {
+      userInfo.setUserInfo(res)
       formPopupEditAvatar.close()
     })
     .catch((err) => {
@@ -89,7 +88,7 @@ const formPopupAddElement = new PopupWithForm(
     formPopupAddElement.loading(true)
     api.addNewCard(data)
     .then((data) => {
-      listCards.addItem(createCard(data));
+      cardsList.addItem(createCard(data));
       formPopupAddElement.close();
     })
     .catch((err) => {
@@ -107,9 +106,9 @@ popupWhithImage.setEventListeners();
 
 const popupWithConfirmation = new PopupWithConfirmation(
   '.popup_confirm', {deletion: (card) => {
-    api.deleteCard(card)
+    api.deleteCard(card.getId())
       .then(() => {
-        card.remove()
+        card.handleDeleteCard()
         popupWithConfirmation.close()
       })
       .catch((err) => {
@@ -128,10 +127,9 @@ const createCard = (data) => {
       popupWhithImage.open(name, link)
     },
 
-    handleConfirmDeletion: (cardId, card) => {
-      popupWithConfirmation.open(cardId)
-      popupWithConfirmation.listenerDeleteCard(cardId)
-      cardNew.handleDeleteCard()
+    handleConfirmDeletion: (card) => {
+      popupWithConfirmation.open()
+      popupWithConfirmation.setData(card)
     },
 
     likeCard: (cardId) => {
@@ -139,6 +137,7 @@ const createCard = (data) => {
         api.deleteLike(cardId)
         .then((data) => {
           cardNew.handleLike(data.likes)
+          cardNew.switchColorLike()
         })
         .catch((err) => {
           console.log(`Ошибка => ${err} => ${err.status}`)
@@ -147,6 +146,7 @@ const createCard = (data) => {
         api.putLike(cardId)
         .then((data) => {
           cardNew.handleLike(data.likes)
+          cardNew.switchColorLike()
         })
         .catch((err) => {
           console.log(`Ошибка => ${err} => ${err.status}`)
@@ -157,9 +157,9 @@ const createCard = (data) => {
   return cardNew.generateCard();
 }
 
-const listCards = new Section({
+const cardsList = new Section({
   renderer: (data) => {
-    listCards.addItem(createCard(data))
+    cardsList.addItem(createCard(data))
   }},
   '.elements__list'
 );

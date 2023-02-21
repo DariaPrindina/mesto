@@ -20,10 +20,13 @@ export class Card {
     return cardElement;
   }
 
+  getId() {
+    return this._id;
+  }
+
   handleLike(likes) {
     this._likes = likes
     this._numberLikes.textContent = this._likes.length
-    this.switchColorLike()
   }
 
   handleDeleteLike() {
@@ -50,10 +53,9 @@ export class Card {
   _setEventListeners() {
     this._likeButton.addEventListener('click', () => {
       this._likeCard(this._id)
-      this.switchColorLike()
     });
     this._deleteButton.addEventListener('click', () =>  {
-      this._handleConfirmDeletion(this._element)});
+      this._handleConfirmDeletion(this)});
     this._elementLink.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link)})
   }
